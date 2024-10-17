@@ -42,7 +42,7 @@
                 $('form').submit(function (event) {
                     event.preventDefault();
                     const searchTerm = $('form input[type="text"]').val();
-                    queryWikipedia(searchTerm, 0);  
+                    queryWikipedia(searchTerm, 0);
                     $('form input[type="text"]').val('');
                 });
             }
@@ -111,7 +111,7 @@
                     const pageItem = $('<li></li>').text(i + 1).css({
                         'font-weight': i === currentPage ? 'bold' : 'normal'
                     }).click(function () {
-                        queryWikipedia($('form input[type="text"]').val(), i * itemsPerPage); 
+                        queryWikipedia($('form input[type="text"]').val(), i * itemsPerPage);
                     });
 
                     if (i === currentPage) {
