@@ -63,8 +63,23 @@
 
       function displayCart() {
         const cartDiv = document.getElementById("cart");
+
+        if (!cartDiv) {
+          console.error("CART DIV NOT FOUND");
+          return;
+        }
+
+        let h2 = cartDiv.querySelector("h2")
+        if (!h2) {
+          h2 = document.createElement("h2");
+          h2.textContent = "Your cart:";
+          cartDiv.appendChild(h2);
+        }
+
+        let cartContentDiv = document.getElementById("cart-content");
+
         if (!cartContentDiv) {
-          const cartContentDiv = document.createElement("div");
+          cartContentDiv = document.createElement("div");
           cartContentDiv.id = "cart-content";
           cartDiv.appendChild(cartContentDiv);
         } else {
@@ -76,18 +91,23 @@
 
       function updateCart() {
         const cart = getCartFromStorage();
-        const cartContentDiv = document.getElementById("cart-contents");
+        const cartContentDiv = document.getElementById("cart-content");
         cartContentDiv.innerHTML = "";
-
-        const ul = document.createElement("ul");
 
         const items = Object.keys(cart);
 
         if (items.length === 0) {
           const cartEmpty = document.createElement('p');
           cartEmpty.textContent = "Your cart is empty.";
-          cartContentDiv.appendChild(cartEmpty);
+          cartContentDiv.appendChild(cartEmpty);  
+
         } else {
+          const clearCart = document.createElement('p');
+          clearCart.textContent = "Clear my cart";
+          cartContentDiv.appendChild(clearCart);
+
+          const ul = document.createElement("ul");
+
           items.forEach(item => {
             const li = document.createElement("li");
             li.textContent = `${item} x ${cart[item]}`;
